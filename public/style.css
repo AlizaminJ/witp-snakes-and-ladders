@@ -1,0 +1,33 @@
+body {
+    background-color: gray;}
+
+
+table {
+    border: 5px solid black;
+    border-collapse: collapse;
+    background-color:white;
+    width: 800px;
+
+}
+
+td {
+    border: 1px solid black;
+    width: 200px;
+    height: 125px;
+    text-align: center;
+}
+
+
+button{
+    border: 12px solid saddlebrown;
+    border-collapse: collapse;
+    background-color: greenyellow;
+    border-radius : 12px;
+    width: 150px;
+
+}
+tr{
+    width: 100%;
+    height: 100%;
+
+}
