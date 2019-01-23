@@ -1,5 +1,5 @@
 'use strict';
-import {Rolldice} from "./features.js";
+import {move} from "./features.js";
 
 function main() {
     console.log("main is working");
@@ -7,13 +7,6 @@ function main() {
 
 
 }
-
-document.getElementById("roll").addEventListener("click",function(){
-    let val=Rolldice();
-   document.getElementById("output").innerHTML=val;
-});
-
-
 
 function createBoard() {
     let table = "";
@@ -27,8 +20,14 @@ function createBoard() {
         }
         table += "</tr>"
     }
+
+
+
     document.getElementById("board").innerHTML = table;
     document.getElementById("1").innerHTML += "<lable id=coin>?</lable>";
+
+move();
+
     $(function () {
         $("tbody").each(function () {
             var arr = $.makeArray($("tr", this).detach());
@@ -38,7 +37,6 @@ function createBoard() {
 
         });
     });
-
 
 }
 
