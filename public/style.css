@@ -40,9 +40,11 @@ background-size: cover;
 
 /* contact form */
 
+/*
 body{
     background: -webkit-linear-gradient(left, #0072ff, #00c6ff);
 }
+*/
 .contact-form{
     background: #fff;
     margin-top: 10%;
