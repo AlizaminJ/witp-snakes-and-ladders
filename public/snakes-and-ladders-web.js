@@ -73,8 +73,14 @@ function renderBoard() {
         cellStartY += cellHeight;
         evenRow = !evenRow;
     }
-
     isBoardRenderdOnce = true;
+    var img =document.getElementById("laddernew");
+    var img2 =document.getElementById("snakes");
+    var img3 =document.getElementById("snakes2");
+    ctx.drawImage(img,65,360,200,260);
+    ctx.drawImage(img,460,65,200,260);
+    ctx.drawImage(img2,325,330,200,260);
+    ctx.drawImage(img3,65,65,200,260);
 
 }
 /*ctx.fillStyle = "red";
@@ -121,7 +127,6 @@ document.getElementById("dice").addEventListener("click", function () {
     document.getElementById("output").innerHTML = diceVal;
     moveCoin(coinCurrentPosition, diceVal);
 });
-
 function createBoard() {
     let table = "";
     let cellNumber = 1;
