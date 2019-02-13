@@ -8,7 +8,7 @@ function main() {
 
 renderBoard();
     //RenderSquareBoard();
-
+   // moveCoin(coinCurrentPosition,9);
 }
 
 var c = document.getElementById("myCanvas");
@@ -16,6 +16,7 @@ var ctx = c.getContext("2d");
 let cells = [];
 let coinCurrentPosition = 1;
 let isBoardRenderdOnce = false;
+
 function renderBoard() {
     // intializing the neccessary variables
     let row=10;
@@ -75,33 +76,39 @@ function renderBoard() {
 
     isBoardRenderdOnce = true;
 
-
 }
-ctx.fillStyle = "red";
+/*ctx.fillStyle = "red";
 ctx.fillRect(0 + 13,585 +22, 40, 40);
+*/
+//moveCoin(coinCurrentPosition,rollDice());
+function moveCoin(Pos, diceVal) {
+    var lastPos = Pos;
+    console.log(Pos);
+    Pos += diceVal;
+    switch (Pos) {
+        case 10:
 
-function moveCoin(nextPos, diceVal) {
-    var lastPos = nextPos;
-    nextPos += diceVal;
-    var temp = lastPos;
-    lastPos = nextPos - lastPos;
-
-    for (let i=0;i<lastPos;i++) {
-        if (nextPos < 101) {
-            var currentCell = cells.filter(c => c.cellNum == temp);
+            Pos = 60;
+            break;
+    }
+    var moveToCell = lastPos;
+    var loopRun = Pos - lastPos;
+    for (let i=0;i<loopRun;i++) {
+        moveToCell++;
+        if (Pos < 101)
+        {
+            var currentCell = cells.filter(c => c.cellNum == moveToCell);
             if (currentCell) {
-                coinCurrentPosition = nextPos;
+                coinCurrentPosition = Pos;
             }
-            setTimeout(function () {
+
                 ctx.clearRect(0, 0, c.width, c.height);
                 renderBoard();
                 ctx.fillStyle = "red";
                 ctx.fillRect(currentCell[0].xAxis + 13, currentCell[0].yAxis + 22, 40, 40);
-            },10);
-
 
         }
-        temp++;
+
     }
 }
 function rollDice(){
@@ -112,7 +119,7 @@ function rollDice(){
 document.getElementById("dice").addEventListener("click", function () {
     var diceVal = rollDice();
     document.getElementById("output").innerHTML = diceVal;
-    setInterval(moveCoin(coinCurrentPosition, diceVal),1000);
+    moveCoin(coinCurrentPosition, diceVal);
 });
 
 function createBoard() {
