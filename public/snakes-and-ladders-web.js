@@ -24,6 +24,7 @@ function renderBoard() {
     let cellStartX = 0;
     let cellNumber = 100;
     let evenRow = false;
+    let colorRed=false;
     //let tempeven = false;
 
     for (let i=0;i<row;i++)
@@ -41,17 +42,57 @@ function renderBoard() {
         {
             if (evenRow)
             {
-                cellStartX -= cellWidth;
-                ctx.rect(cellStartX, cellStartY, cellWidth,cellHeight);
-                ctx.fillText(cellNumber, cellStartX+20, cellStartY+20);
-                ctx.stroke();
+                if (colorRed) {
+
+                    cellStartX -= cellWidth;
+                    ctx.rect(cellStartX, cellStartY, cellWidth, cellHeight);
+
+                    ctx.fillStyle = "#FF0000";
+                    ctx.fillRect(cellStartX, cellStartY, cellWidth, cellHeight);
+                    ctx.fillStyle = "black";
+                    ctx.fillText(cellNumber, cellStartX + 20, cellStartY + 20);
+                    ctx.stroke();
+                    colorRed =false;
+                }
+                else{
+                    cellStartX -= cellWidth;
+                    ctx.rect(cellStartX, cellStartY, cellWidth, cellHeight);
+
+                    ctx.fillStyle = "#FFFFFF";
+                    ctx.fillRect(cellStartX, cellStartY, cellWidth, cellHeight);
+                    ctx.fillStyle = "black";
+                    ctx.fillText(cellNumber, cellStartX + 20, cellStartY + 20);
+                    ctx.stroke();
+                    colorRed = true;
+                }
+
             }
             else
             {
-                ctx.rect(cellStartX, cellStartY, cellWidth,cellHeight);
-                ctx.fillText(cellNumber, cellStartX+20, cellStartY+20);
-                ctx.stroke();
-                cellStartX += cellWidth;
+                if (colorRed){
+                    ctx.rect(cellStartX, cellStartY, cellWidth, cellHeight);
+
+                    ctx.fillStyle = "#FF0000";
+                    ctx.fillRect(cellStartX, cellStartY, cellWidth, cellHeight);
+                    ctx.fillStyle = "black";
+                    ctx.fillText(cellNumber, cellStartX + 20, cellStartY + 20);
+                    ctx.stroke();
+                    cellStartX += cellWidth;
+                    colorRed = false;
+                }
+                else
+                {
+                    ctx.rect(cellStartX, cellStartY, cellWidth, cellHeight);
+
+                    ctx.fillStyle = "#FFFFFF";
+                    ctx.fillRect(cellStartX, cellStartY, cellWidth, cellHeight);
+                    ctx.fillStyle = "black";
+                    ctx.fillText(cellNumber, cellStartX + 20, cellStartY + 20);
+                    ctx.stroke();
+                    cellStartX += cellWidth;
+                    colorRed = true;
+                }
+
             }
 
             cellNumber--;
@@ -60,14 +101,20 @@ function renderBoard() {
         cellStartY += cellHeight;
         evenRow = !evenRow;
     }
-
+    var img =document.getElementById("laddernew");
+    var img2 =document.getElementById("snakes");
+    var img3 =document.getElementById("snakes2");
+    ctx.drawImage(img,65,360,200,260);
+    ctx.drawImage(img,460,65,200,260);
+    ctx.drawImage(img2,325,330,200,260);
+    ctx.drawImage(img3,65,65,200,260);
 
 }
 placeCoin(10,10);
 function placeCoin(x,y) {
 
 
-    ctx.fillStyle = "red";
+    ctx.fillStyle = "black";
     ctx.rect(x,y, 40, 40);
 //ctx.stroke();
 }
