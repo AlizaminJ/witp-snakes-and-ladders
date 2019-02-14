@@ -8,7 +8,7 @@ function main() {
 
 renderBoard();
     //RenderSquareBoard();
-   // moveCoin(coinCurrentPosition,9);
+    moveCoin(coinCurrentPosition,0);
 }
 
 var c = document.getElementById("myCanvas");
@@ -16,6 +16,7 @@ var ctx = c.getContext("2d");
 let cells = [];
 let coinCurrentPosition = 1;
 let isBoardRenderdOnce = false;
+var coin = document.getElementById("coin");
 
 function renderBoard() {
     // intializing the neccessary variables
@@ -77,10 +78,12 @@ function renderBoard() {
     var img =document.getElementById("laddernew");
     var img2 =document.getElementById("snakes");
     var img3 =document.getElementById("snakes2");
+
     ctx.drawImage(img,65,360,200,260);
     ctx.drawImage(img,460,65,200,260);
     ctx.drawImage(img2,325,330,200,260);
     ctx.drawImage(img3,65,65,200,260);
+
 
 }
 /*ctx.fillStyle = "red";
@@ -92,30 +95,37 @@ function moveCoin(Pos, diceVal) {
     console.log(Pos);
     Pos += diceVal;
     switch (Pos) {
-        case 10:
-
-            Pos = 60;
+        case 3:
+            Pos = 43;
+            break;
+        case 46:
+            Pos = 13;
+        case 52:
+            Pos = 89;
+            break;
+        case 84:
+            Pos = 59;
             break;
     }
     var moveToCell = lastPos;
     var loopRun = Pos - lastPos;
-    for (let i=0;i<loopRun;i++) {
-        moveToCell++;
+    /*for (let i=0;i<loopRun;i++) {
+        moveToCell++;*/
         if (Pos < 101)
         {
-            var currentCell = cells.filter(c => c.cellNum == moveToCell);
+            var currentCell = cells.filter(c => c.cellNum == Pos);
             if (currentCell) {
                 coinCurrentPosition = Pos;
             }
 
                 ctx.clearRect(0, 0, c.width, c.height);
                 renderBoard();
-                ctx.fillStyle = "red";
-                ctx.fillRect(currentCell[0].xAxis + 13, currentCell[0].yAxis + 22, 40, 40);
+                //ctx.fillStyle = "red";
+                //ctx.fillRect(currentCell[0].xAxis + 13, currentCell[0].yAxis + 22, 40, 40);
+                ctx.drawImage(coin,currentCell[0].xAxis + 13,currentCell[0].yAxis + 22,30,40);
+            }
 
-        }
-
-    }
+    //}
 }
 function rollDice(){
     let x = Math.floor(Math.random() * 6) + 1;
