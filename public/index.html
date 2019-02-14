@@ -13,17 +13,20 @@
 	<style>body{padding-top:50px;}.starter-template{padding:40px 15px;text-align:center;}</style>
 
 	<link rel="stylesheet" href="style.css">
+	<!-- jQuery cdn -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
 
 	<!--[if IE]>
-								<script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
-								<script src="https://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
-				<![endif]-->
+			<script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
+			<script src="https://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
+	<![endif]-->
 </head>
 
 <body>
 
-
 	<div class="container">
+
 
 
 		<table id="board" border="1" class="table">
@@ -44,24 +47,33 @@
 
 
 
+			<canvas id="myCanvas" width="650" height="650" style="border:1px solid #c3c3c3;">
+				<img id="laddernew" src="ladder1.gif">
+				<img id="snakes" src="snakes.png">
+				<img id="snakes2" src="snakes2.png">
+			</canvas>
+		</div>
 
 
-    <div class='board' align='center'>
+		<div class="side-container" id="dice" align="middle">
+			<button id="start">Start a new game</button>
 
+			<button id="roll">Roll The Dice</button>
 
+			<p id="output" style="clear:right;">0</p>
 
-    </div>
-
-    <div id="dice" class="dice" align="middle">
-		<button id="roll">Roll The Dice</button>
-	     <p id="output" style="clear:right;">0</p>
+			<div class="dice-and-roll">
+				<img src="images/6.png" alt="dice6" id="dice_img">
+			</div>
+		</div>
 
 	</div>
+
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"></script>
 	<script type="module" src="snakes-and-ladders-web.js"></script>
 	<script src="snakes-and-ladders-web.js"></script>
-    <input type="image" src="public/images/dice.jpeg" class="diceroll" />
+	<input type="image" src="public/images/dice.jpeg" class="diceroll" />
 </body>
 
 </html>
