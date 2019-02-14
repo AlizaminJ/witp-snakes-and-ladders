@@ -27,9 +27,6 @@ function renderBoard() {
     let cellStartX = 0;
     let cellNumber = 100;
     let evenRow = false;
-    let colorRed=false;
-    //let tempeven = false;
-
     // loop for render the board
     for (let i=0;i<row;i++)
     {
@@ -44,60 +41,17 @@ function renderBoard() {
         {
             if (evenRow)
             {
-
-                if (colorRed) {
-
-                    cellStartX -= cellWidth;
-                    ctx.rect(cellStartX, cellStartY, cellWidth, cellHeight);
-
-                    ctx.fillStyle = "#FF0000";
-                    ctx.fillRect(cellStartX, cellStartY, cellWidth, cellHeight);
-                    ctx.fillStyle = "black";
-                    ctx.fillText(cellNumber, cellStartX + 20, cellStartY + 20);
-                    ctx.stroke();
-                    colorRed =false;
-                }
-                else{
-                    cellStartX -= cellWidth;
-                    ctx.rect(cellStartX, cellStartY, cellWidth, cellHeight);
-
-                    ctx.fillStyle = "#FFFFFF";
-                    ctx.fillRect(cellStartX, cellStartY, cellWidth, cellHeight);
-                    ctx.fillStyle = "black";
-                    ctx.fillText(cellNumber, cellStartX + 20, cellStartY + 20);
-                    ctx.stroke();
-                    colorRed = true;
-                }
+                cellStartX -= cellWidth;
+                ctx.rect(cellStartX, cellStartY, cellWidth,cellHeight);
+                ctx.fillText(cellNumber, cellStartX+20, cellStartY+20);
+                ctx.stroke();
 
             }
             else
             {
-
-                if (colorRed){
-                    ctx.rect(cellStartX, cellStartY, cellWidth, cellHeight);
-
-                    ctx.fillStyle = "#FF0000";
-                    ctx.fillRect(cellStartX, cellStartY, cellWidth, cellHeight);
-                    ctx.fillStyle = "black";
-                    ctx.fillText(cellNumber, cellStartX + 20, cellStartY + 20);
-                    ctx.stroke();
-                    cellStartX += cellWidth;
-                    colorRed = false;
-                }
-                else
-                {
-                    ctx.rect(cellStartX, cellStartY, cellWidth, cellHeight);
-
-                    ctx.fillStyle = "#FFFFFF";
-                    ctx.fillRect(cellStartX, cellStartY, cellWidth, cellHeight);
-                    ctx.fillStyle = "black";
-                    ctx.fillText(cellNumber, cellStartX + 20, cellStartY + 20);
-                    ctx.stroke();
-                    cellStartX += cellWidth;
-                    colorRed = true;
-                }
-
-
+                ctx.rect(cellStartX, cellStartY, cellWidth,cellHeight);
+                ctx.fillText(cellNumber, cellStartX+20, cellStartY+20);
+                ctx.stroke();
 
             }
             if (!isBoardRenderdOnce) {
@@ -110,7 +64,6 @@ function renderBoard() {
             }
             if (!evenRow) {
                 cellStartX += cellWidth;
-
             }
 
             cellNumber--;
@@ -120,13 +73,7 @@ function renderBoard() {
         cellStartY += cellHeight;
         evenRow = !evenRow;
     }
-    var img =document.getElementById("laddernew");
-    var img2 =document.getElementById("snakes");
-    var img3 =document.getElementById("snakes2");
-    ctx.drawImage(img,65,360,200,260);
-    ctx.drawImage(img,460,65,200,260);
-    ctx.drawImage(img2,325,330,200,260);
-    ctx.drawImage(img3,65,65,200,260);
+
 
     isBoardRenderdOnce = true;
 
@@ -170,7 +117,6 @@ function moveCoin(Pos, diceVal) {
                 ctx.fillStyle = "red";
                 ctx.fillRect(currentCell[0].xAxis + 13, currentCell[0].yAxis + 22, 40, 40);
 
-
         }
 
     }
@@ -178,7 +124,6 @@ function moveCoin(Pos, diceVal) {
 function rollDice(){
     let x = Math.floor(Math.random() * 6) + 1;
     return x;
-
 }
 
 document.getElementById("dice").addEventListener("click", function () {
