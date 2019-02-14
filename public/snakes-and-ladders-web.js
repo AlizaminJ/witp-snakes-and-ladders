@@ -27,6 +27,10 @@ function renderBoard() {
     let colorRed=false;
     //let tempeven = false;
 
+<<<<<<< HEAD
+=======
+    // loop for render the board
+>>>>>>> 91c4584f4d46b99278f46fe681dd4c26ae11819f
     for (let i=0;i<row;i++)
     {
 
@@ -42,6 +46,10 @@ function renderBoard() {
         {
             if (evenRow)
             {
+<<<<<<< HEAD
+=======
+
+>>>>>>> 91c4584f4d46b99278f46fe681dd4c26ae11819f
                 if (colorRed) {
 
                     cellStartX -= cellWidth;
@@ -69,6 +77,10 @@ function renderBoard() {
             }
             else
             {
+<<<<<<< HEAD
+=======
+
+>>>>>>> 91c4584f4d46b99278f46fe681dd4c26ae11819f
                 if (colorRed){
                     ctx.rect(cellStartX, cellStartY, cellWidth, cellHeight);
 
@@ -93,6 +105,23 @@ function renderBoard() {
                     colorRed = true;
                 }
 
+<<<<<<< HEAD
+=======
+
+
+            }
+            if (!isBoardRenderdOnce) {
+                let cell = {
+                    cellNum: cellNumber,
+                    xAxis: cellStartX,
+                    yAxis: cellStartY
+                }
+                cells.push(cell);
+            }
+            if (!evenRow) {
+                cellStartX += cellWidth;
+
+>>>>>>> 91c4584f4d46b99278f46fe681dd4c26ae11819f
             }
 
             cellNumber--;
@@ -113,10 +142,27 @@ function renderBoard() {
 placeCoin(10,10);
 function placeCoin(x,y) {
 
+<<<<<<< HEAD
 
     ctx.fillStyle = "black";
     ctx.rect(x,y, 40, 40);
 //ctx.stroke();
+=======
+                ctx.clearRect(0, 0, c.width, c.height);
+                renderBoard();
+                ctx.fillStyle = "red";
+                ctx.fillRect(currentCell[0].xAxis + 13, currentCell[0].yAxis + 22, 40, 40);
+
+
+        }
+
+    }
+}
+function rollDice(){
+    let x = Math.floor(Math.random() * 6) + 1;
+    return x;
+
+>>>>>>> 91c4584f4d46b99278f46fe681dd4c26ae11819f
 }
 
 document.getElementById("dice").addEventListener("click", function () {
