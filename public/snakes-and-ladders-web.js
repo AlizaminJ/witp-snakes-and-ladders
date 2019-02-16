@@ -8,6 +8,8 @@ function main() {
 renderBoard();
     //RenderSquareBoard();
 
+    moveCoin(coinCurrentPosition,0);
+
 }
 
 var c = document.getElementById("myCanvas");
@@ -15,7 +17,11 @@ var ctx = c.getContext("2d");
 let cells = [];
 let coinCurrentPosition = 1;
 let isBoardRenderdOnce = false;
+
 let player1=true;
+
+var coin = document.getElementById("coin");
+
 
 function renderBoard() {
 
@@ -28,9 +34,11 @@ function renderBoard() {
     let cellStartX = 0;
     let cellNumber = 100;
     let evenRow = false;
+
     let colorRed=false;
     let isBoardRenderdOnce = false;
     //let tempeven = false;
+
 
 
     // loop for render the board
@@ -104,6 +112,8 @@ function renderBoard() {
                 }
 
 
+           
+
             }
             if (!isBoardRenderdOnce) {
                 let cell = {
@@ -115,8 +125,6 @@ function renderBoard() {
             }
             if (!evenRow) {
                 cellStartX += cellWidth;
-
-
             }
 
             cellNumber--;
@@ -129,6 +137,7 @@ function renderBoard() {
     var img =document.getElementById("laddernew");
     var img2 =document.getElementById("snakes");
     var img3 =document.getElementById("snakes2");
+
     ctx.drawImage(img,65,360,200,260);
     ctx.drawImage(img,460,65,200,260);
     ctx.drawImage(img2,325,330,200,260);
@@ -161,22 +170,20 @@ function moveCoin(Pos, diceVal) {
     var loopRun = Pos - lastPos;
     /*for (let i=0;i<loopRun;i++) {
         moveToCell++;*/
-    if (Pos < 101)
-    {
-        var currentCell = cells.filter(c => c.cellNum == Pos);
-        if (currentCell) {
-            coinCurrentPosition = Pos;
-        }
+  
+        if (Pos < 101)
+        {
+            var currentCell = cells.filter(c => c.cellNum == Pos);
+            if (currentCell) {
+                coinCurrentPosition = Pos;
+            }
 
-        ctx.clearRect(0, 0, c.width, c.height);
-        renderBoard();
-        //ctx.fillStyle = "red";
-        //ctx.fillRect(currentCell[0].xAxis + 13, currentCell[0].yAxis + 22, 40, 40);
-        var img4 =document.getElementById("coin");
-
-        ctx.drawImage(img4,currentCell[0].xAxis + 13, currentCell[0].yAxis + 22, 40, 40);
-
-    }
+                ctx.clearRect(0, 0, c.width, c.height);
+                renderBoard();
+                //ctx.fillStyle = "red";
+                //ctx.fillRect(currentCell[0].xAxis + 13, currentCell[0].yAxis + 22, 40, 40);
+                ctx.drawImage(coin,currentCell[0].xAxis + 13,currentCell[0].yAxis + 22,30,40);
+            }
 
     //}
 }
@@ -187,7 +194,6 @@ function rollDice() {
     var dice = document.getElementById("dice_img");
     dice.src = "images/" + x + ".png";
     return x;
-
 }
 // start a new game
 $("#start").click(function () {
@@ -200,9 +206,6 @@ document.getElementById("dice").addEventListener("click", function () {
     document.getElementById("output").innerHTML = diceVal;
     moveCoin(coinCurrentPosition, diceVal);
 });
-
-
-
 
 
 window.onload = main;
