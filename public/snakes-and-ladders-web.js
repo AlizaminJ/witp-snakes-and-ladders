@@ -28,6 +28,7 @@ function renderBoard() {
     let cellStartX = 0;
     let cellNumber = 100;
     let evenRow = false;
+    let colorRed = false;
     // loop for render the board
     for (let i=0;i<row;i++)
     {
@@ -42,17 +43,49 @@ function renderBoard() {
         {
             if (evenRow)
             {
-                cellStartX -= cellWidth;
-                ctx.rect(cellStartX, cellStartY, cellWidth,cellHeight);
-                ctx.fillText(cellNumber, cellStartX+20, cellStartY+20);
-                ctx.stroke();
+                if (colorRed) {
+                    cellStartX -= cellWidth;
+                    ctx.rect(cellStartX, cellStartY, cellWidth, cellHeight);
+                    ctx.fillStyle = "#FF0000";
+                    ctx.fillRect(cellStartX, cellStartY, cellWidth, cellHeight);
+                    ctx.fillStyle = "black";
+                    ctx.fillText(cellNumber, cellStartX + 20, cellStartY + 20);
+                    ctx.stroke();
+                    colorRed = false;
+                }
+                else{
+                    cellStartX -= cellWidth;
+                    ctx.rect(cellStartX, cellStartY, cellWidth, cellHeight);
+                    ctx.fillStyle = "#FFFFFF";
+                    ctx.fillRect(cellStartX, cellStartY, cellWidth, cellHeight);
+                    ctx.fillStyle = "black";
+                    ctx.fillText(cellNumber, cellStartX + 20, cellStartY + 20);
+                    ctx.stroke();
+                    colorRed = true;
+                }
 
             }
             else
             {
-                ctx.rect(cellStartX, cellStartY, cellWidth,cellHeight);
-                ctx.fillText(cellNumber, cellStartX+20, cellStartY+20);
-                ctx.stroke();
+                if (!colorRed) {
+                    ctx.rect(cellStartX, cellStartY, cellWidth, cellHeight);
+                    ctx.fillStyle = "#FFFFFF";
+                    ctx.fillRect(cellStartX, cellStartY, cellWidth, cellHeight);
+                    ctx.fillStyle = "black";
+                    ctx.fillText(cellNumber, cellStartX + 20, cellStartY + 20);
+                    ctx.stroke();
+                    colorRed = true;
+                }
+                else
+                {
+                    ctx.rect(cellStartX, cellStartY, cellWidth, cellHeight);
+                    ctx.fillStyle = "#FF0000";
+                    ctx.fillRect(cellStartX, cellStartY, cellWidth, cellHeight);
+                    ctx.fillStyle = "black";
+                    ctx.fillText(cellNumber, cellStartX + 20, cellStartY + 20);
+                    ctx.stroke();
+                    colorRed = false;
+                }
 
             }
             if (!isBoardRenderdOnce) {
