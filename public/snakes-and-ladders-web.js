@@ -12,6 +12,10 @@ renderBoard();
 
 var c = document.getElementById("myCanvas");
 var ctx = c.getContext("2d");
+let cells = [];
+let coinCurrentPosition = 1;
+let isBoardRenderdOnce = false;
+let player1=true;
 
 function renderBoard() {
 
@@ -25,12 +29,12 @@ function renderBoard() {
     let cellNumber = 100;
     let evenRow = false;
     let colorRed=false;
+    let isBoardRenderdOnce = false;
     //let tempeven = false;
 
-<<<<<<< HEAD
-=======
+
     // loop for render the board
->>>>>>> 91c4584f4d46b99278f46fe681dd4c26ae11819f
+
     for (let i=0;i<row;i++)
     {
 
@@ -46,10 +50,7 @@ function renderBoard() {
         {
             if (evenRow)
             {
-<<<<<<< HEAD
-=======
 
->>>>>>> 91c4584f4d46b99278f46fe681dd4c26ae11819f
                 if (colorRed) {
 
                     cellStartX -= cellWidth;
@@ -62,7 +63,8 @@ function renderBoard() {
                     ctx.stroke();
                     colorRed =false;
                 }
-                else{
+                else
+                    {
                     cellStartX -= cellWidth;
                     ctx.rect(cellStartX, cellStartY, cellWidth, cellHeight);
 
@@ -73,14 +75,10 @@ function renderBoard() {
                     ctx.stroke();
                     colorRed = true;
                 }
-
             }
             else
             {
-<<<<<<< HEAD
-=======
 
->>>>>>> 91c4584f4d46b99278f46fe681dd4c26ae11819f
                 if (colorRed){
                     ctx.rect(cellStartX, cellStartY, cellWidth, cellHeight);
 
@@ -90,7 +88,7 @@ function renderBoard() {
                     ctx.fillText(cellNumber, cellStartX + 20, cellStartY + 20);
                     ctx.stroke();
                     cellStartX += cellWidth;
-                    colorRed = false;
+                    colorRed = true;
                 }
                 else
                 {
@@ -105,9 +103,6 @@ function renderBoard() {
                     colorRed = true;
                 }
 
-<<<<<<< HEAD
-=======
-
 
             }
             if (!isBoardRenderdOnce) {
@@ -121,7 +116,7 @@ function renderBoard() {
             if (!evenRow) {
                 cellStartX += cellWidth;
 
->>>>>>> 91c4584f4d46b99278f46fe681dd4c26ae11819f
+
             }
 
             cellNumber--;
@@ -130,6 +125,7 @@ function renderBoard() {
         cellStartY += cellHeight;
         evenRow = !evenRow;
     }
+    isBoardRenderdOnce = true;
     var img =document.getElementById("laddernew");
     var img2 =document.getElementById("snakes");
     var img3 =document.getElementById("snakes2");
@@ -139,67 +135,74 @@ function renderBoard() {
     ctx.drawImage(img3,65,65,200,260);
 
 }
-placeCoin(10,10);
-function placeCoin(x,y) {
+/*ctx.fillStyle = "red";
+ctx.fillRect(0 + 13,585 +22, 40, 40);
+*/
+//moveCoin(coinCurrentPosition,rollDice());
 
-<<<<<<< HEAD
-
-    ctx.fillStyle = "black";
-    ctx.rect(x,y, 40, 40);
-//ctx.stroke();
-=======
-                ctx.clearRect(0, 0, c.width, c.height);
-                renderBoard();
-                ctx.fillStyle = "red";
-                ctx.fillRect(currentCell[0].xAxis + 13, currentCell[0].yAxis + 22, 40, 40);
-
-
+function moveCoin(Pos, diceVal) {
+    var lastPos = Pos;
+    console.log(Pos);
+    Pos += diceVal;
+    switch (Pos) {
+        case 3:
+            Pos = 43;
+            break;
+        case 46:
+            Pos = 13;
+        case 52:
+            Pos = 89;
+            break;
+        case 84:
+            Pos = 59;
+            break;
+    }
+    var moveToCell = lastPos;
+    var loopRun = Pos - lastPos;
+    /*for (let i=0;i<loopRun;i++) {
+        moveToCell++;*/
+    if (Pos < 101)
+    {
+        var currentCell = cells.filter(c => c.cellNum == Pos);
+        if (currentCell) {
+            coinCurrentPosition = Pos;
         }
 
+        ctx.clearRect(0, 0, c.width, c.height);
+        renderBoard();
+        //ctx.fillStyle = "red";
+        //ctx.fillRect(currentCell[0].xAxis + 13, currentCell[0].yAxis + 22, 40, 40);
+        var img4 =document.getElementById("coin");
+
+        ctx.drawImage(img4,currentCell[0].xAxis + 13, currentCell[0].yAxis + 22, 40, 40);
+
     }
+
+    //}
 }
-function rollDice(){
+
+// roll the dice
+function rollDice() {
     let x = Math.floor(Math.random() * 6) + 1;
+    var dice = document.getElementById("dice_img");
+    dice.src = "images/" + x + ".png";
     return x;
 
->>>>>>> 91c4584f4d46b99278f46fe681dd4c26ae11819f
 }
+// start a new game
+$("#start").click(function () {
+    location.reload();
+});
+
 
 document.getElementById("dice").addEventListener("click", function () {
-   console.log("hi");
-    placeCoin(100,10);
+    var diceVal = rollDice();
+    document.getElementById("output").innerHTML = diceVal;
+    moveCoin(coinCurrentPosition, diceVal);
 });
-function createBoard() {
-    let table = "";
-    let cellNumber = 1;
-    for (let i = 0; i < 10; i++) {
-        table += "<tr>";
-        for (let j = 0; j < 10; j++) {
-
-            table += "<td id=" + cellNumber + ">";
-            table += cellNumber++ + "</td>";
-        }
-        table += "</tr>"
-    }
 
 
 
-    document.getElementById("board").innerHTML = table;
-    document.getElementById("1").innerHTML += "<lable id=coin>?</lable>";
-
-move();
-
-    $(function () {
-        $("tbody").each(function () {
-            var arr = $.makeArray($("tr", this).detach());
-            arr.reverse();
-
-            $(this).append(arr);
-
-        });
-    });
-
-}
 
 
 window.onload = main;
