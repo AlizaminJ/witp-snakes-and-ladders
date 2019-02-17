@@ -12,11 +12,30 @@ body {
 	font-size: 18px;
 }
 
+.container {
+	padding-bottom: 2.5rem;
+	/*
+	position: relative;
+	min-height: 100vh;
+*/
+}
+
+.main-container,
+.side-container {
+	margin-left: 20px;
+	margin-right: 20px;
+	margin-top: 20px;
+	margin-bottom: 20px;
+	padding-top: 20px;
+	position: relative;
+	float: left;
+}
+
 .footer {
 	position: absolute;
 	bottom: 0;
 	width: 100%;
-	height: 60px;
+	height: 2.5rem;
 }
 
 #myCanvas {
@@ -38,18 +57,6 @@ body {
 	padding: 40px 15px;
 	text-align: center;
 	margin:
-}
-
-.main-container,
-.side-container {
-	margin-left: 20px;
-	margin-right: 20px;
-	margin-top: 20px;
-	margin-bottom: 20px;
-	padding-top: 20px;
-	position: relative;
-	float: left;
-
 }
 
 
