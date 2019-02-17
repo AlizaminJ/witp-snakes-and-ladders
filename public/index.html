@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="">
+<html lang="en">
 
 <head>
 	<meta charset="UTF-8">
@@ -10,59 +10,73 @@
 	<link rel="shortcut icon" href="">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap-theme.min.css">
-	<style>body{padding-top:50px;}.starter-template{padding:40px 15px;text-align:center;}</style>
 
 	<link rel="stylesheet" href="style.css">
 
 	<!--[if IE]>
-								<script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
-								<script src="https://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
-				<![endif]-->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
+	<![endif]-->
 </head>
 
 <body>
+	<!-- navbar -->
+	<header class="header"></header>
 
 
+	<!--Board and Dice-->
 	<div class="container">
 
+		<div class="main-container">
+			<table id="board" border="1" class="table">
 
-		<table id="board" border="1" class="table">
+			</table>
 
-
-
-		</table>
-
-
-		<canvas id="myCanvas" width="650" height="650" style="border:1px solid #c3c3c3;">
-			<img id="laddernew" src="ladder1.gif">
-			<img id="snakes" src="snakes.png">
-			<img id="snakes2" src="snakes2.png">
-            <img id="coin" src="Peacock.png">
-		</canvas>
-		</canvas>
+			<canvas id="myCanvas" width="650" height="650" style="border:5px solid #c3c3c3;">
+				<img id="laddernew" src="images/ladder1.gif">
+				<img id="snakes" src="images/snakes.png">
+				<img id="snakes2" src="images/snakes2.png">
+				<img id="coin" src="images/coin1.png">
+			</canvas>
+		</div>
 	</div>
 
 
+	<div class="side-container" id="dice" align="middle">
+		<button id="start" type="button" class="btn btn-primary">Start A New Game</button>
 
+		<button id="roll" type="button" class="btn btn-primary">Roll The Dice</button>
 
+		<p id="output" style="clear:right;">0</p>
 
-
-    <div class='board' align='center'>
-
-
-
-    </div>
-
-    <div id="dice" class="dice" align="middle">
-		<button id="roll">Roll The Dice</button>
-	     <p id="output" style="clear:right;">0</p>
-
+		<div class="dice-and-roll">
+			<img src="images/6.png" alt="dice6" id="dice_img">
+		</div>
 	</div>
+
+	<!--footer-->
+	<footer class="footer"> </footer>
+
+
+	<!-- Bootstrap core JavaScript
+    ================================================== -->
+	<!-- Placed at the end of the document so the pages load faster -->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"></script>
+
+	<!--game js files-->
 	<script type="module" src="snakes-and-ladders-web.js"></script>
 	<script src="snakes-and-ladders-web.js"></script>
-    <input type="image" src="public/images/dice.jpeg" class="diceroll" />
+
+	<script>
+		$(function() {
+			$(".header").load("header.html");
+			$(".footer").load("footer.html");
+		});
+
+	</script>
+
+
 </body>
 
 </html>
