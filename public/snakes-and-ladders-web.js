@@ -10,6 +10,7 @@ function main() {
 	renderBoard();
 	//RenderSquareBoard();
 	moveCoin(coinCurrentPosition, 0);
+
 }
 
 var c = document.getElementById("myCanvas");
@@ -18,7 +19,6 @@ let cells = [];
 let coinCurrentPosition = 1;
 let isBoardRenderdOnce = false;
 var coin = document.getElementById("coin");
-
 function renderBoard() {
 	// intializing the neccessary variables
 	let row = 10;
@@ -109,11 +109,12 @@ function renderBoard() {
 	var img = document.getElementById("laddernew");
 	var img2 = document.getElementById("snakes");
 	var img3 = document.getElementById("snakes2");
-
+    var img4 = document.getElementById("flag");
 	ctx.drawImage(img, 65, 360, 200, 260);
 	ctx.drawImage(img, 460, 65, 200, 260);
 	ctx.drawImage(img2, 325, 330, 200, 260);
 	ctx.drawImage(img3, 65, 65, 200, 260);
+    ctx.drawImage(img4, -1, -1, 65, 65);
 
 };
 
@@ -149,7 +150,11 @@ function moveCoin(Pos, diceVal) {
 		renderBoard();
 
 		ctx.drawImage(coin, currentCell[0].xAxis + 13, currentCell[0].yAxis + 22, 30, 40);
-	}
+    }
+	else if(Pos>=100){
+gameOver();
+        }
+
 
 
 };
@@ -169,6 +174,14 @@ function rollDice() {
 	dice.src = "images/" + x + ".png";
 	return x;
 };
+function gameOver(){
+    ctx.clearRect(0, 0, c.width, c.height);
+    renderBoard();
+    ctx.drawImage(coin, -1,5, 30, 40);
+    document.getElementById("output").innerHTML="Congratulations, you won!Please start a new game!";
+	}
+
+
 
 // start a new game
 $("#start").click(function () {
