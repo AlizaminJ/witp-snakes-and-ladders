@@ -13,6 +13,9 @@
 
 	<link rel="stylesheet" href="style.css">
 
+	<!-- JQuery cdn-->
+	<script src="https://ajax.googleapis.com/ajax/libs/d3js/5.7.0/d3.min.js"></script>
+
 	<!--[if IE]>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
@@ -29,26 +32,26 @@
 		<div class="contact-image">
 			<img src="https://image.ibb.co/kUagtU/rocket_contact.png" alt="rocket_contact" />
 		</div>
-		<form method="post">
+		<form action="https://formspree.io/your@email.com" method="POST">
 			<h3>Drop Us a Message</h3>
 			<div class="row">
 				<div class="col-md-6">
 					<div class="form-group">
-						<input type="text" name="txtName" class="form-control" placeholder="Your Name *" value="" />
+						<input type="text" name="txtName" class="form-control" placeholder="Your Name *" value="" id="inputName"/>
 					</div>
 					<div class="form-group">
-						<input type="text" name="txtEmail" class="form-control" placeholder="Your Email *" value="" />
+						<input type="text" name="txtEmail" class="form-control" placeholder="Your Email *" value="" id="inputEmail/>
 					</div>
 					<div class="form-group">
-						<input type="text" name="txtPhone" class="form-control" placeholder="Your Phone Number *" value="" />
+						<input type="text" name="txtPhone" class="form-control" placeholder="Your Phone Number *" value="" id="inputPhone"/>
 					</div>
 					<div class="form-group">
-						<input type="submit" name="btnSubmit" class="btnContact" value="Send Message" />
+						<input type="submit" name="btnSubmit" class="btnContact" value="Send Message" id="sendMessage" />
 					</div>
 				</div>
 				<div class="col-md-6">
 					<div class="form-group">
-						<textarea name="txtMsg" class="form-control" placeholder="Your Message *" style="width: 100%; height: 150px;"></textarea>
+						<textarea name="txtMsg" class="form-control" placeholder="Your Message *" style="width: 100%; height: 150px;" id="inputMessage"></textarea>
 					</div>
 				</div>
 			</div>
@@ -78,6 +81,26 @@
 
 	</script>
 
+	<!--forwarding emails-->
+<script>$(document).ready ->
+  $('#sendMessage').submit (e) ->
+    name = document.getElementById('inputName')
+    email = document.getElementById('inputEmail')
+	message = document.getElementById('inputMessage')
+	phone = document.getElementById('inputPhone')
+
+    if !name.value or !email.value or !message.value or !phone.value
+      alertify.error 'Please check your entries'
+      return false
+    else
+      $.ajax
+        method: 'POST'
+        url: '//formspree.io/jafarli_alizamin@yahoo.com'
+        data: $('#contact-form').serialize()
+        datatype: 'json'
+      e.preventDefault()
+      $(this).get(0).reset()
+      alertify.success 'Message sent'</script>
 
 </body>
 
