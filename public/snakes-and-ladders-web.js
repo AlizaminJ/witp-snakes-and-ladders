@@ -13,6 +13,8 @@ function main() {
 
 }
 
+
+
 var c = document.getElementById("myCanvas");
 var ctx = c.getContext("2d");
 let cells = [];
@@ -36,7 +38,7 @@ function renderBoard() {
 		} else {
 			cellStartX = 0;
 		}
-		//to make th e board colorful
+		// to make th e board colorful
 		let colorRed = false;
 		for (let j = 0; j < col; j++) {
 			if (evenRow) {
@@ -119,7 +121,7 @@ function renderBoard() {
 };
 
 
-//moveCoin(coinCurrentPosition,rollDice());
+// moveCoin(coinCurrentPosition,rollDice());
 function moveCoin(Pos, diceVal) {
 	var lastPos = Pos;
 	console.log(Pos);
@@ -154,12 +156,9 @@ function moveCoin(Pos, diceVal) {
 	else if(Pos>=100){
 gameOver();
         }
-
-
-
 };
 
-//can be deleted later
+// can be deleted later
 document.getElementById("dice").addEventListener("click", function () {
 	var diceVal = rollDice();
 	document.getElementById("output").innerHTML = diceVal;
@@ -167,28 +166,27 @@ document.getElementById("dice").addEventListener("click", function () {
 });
 
 
-//random number generator and dice picture
+// random number generator and dice picture
 function rollDice() {
 	let x = Math.floor(Math.random() * 6) + 1;
 	var dice = document.getElementById("dice_img");
 	dice.src = "images/" + x + ".png";
 	return x;
 };
+
+// gameOver
 function gameOver(){
     ctx.clearRect(0, 0, c.width, c.height);
     renderBoard();
-    ctx.drawImage(coin, -1,5, 30, 40);
-    document.getElementById("output").innerHTML="Congratulations, you won!Please start a new game!";
+	ctx.drawImage(coin, -1,5, 30, 40);
+	swal("Congrats!", "You won!", "success");
+
+   // document.getElementById("output").innerHTML="Congratulations, you won! Please start a new game!";
 	}
-
-
 
 // start a new game
 $("#start").click(function () {
 	location.reload();;
 });
-
-
-
 
 window.onload = main;
