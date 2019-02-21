@@ -8,28 +8,34 @@ body {
 		sans-serif,
 		fantasy;
 	vertical-align: baseline;
+	background: transparent;
 	outline: none;
 	-webkit-box-sizing: border-box;
 	-moz-box-sizing: border-box;
 	box-sizing: border-box;
-
+	width: 100%;
+	height: 100%;
 	overflow: auto !important;
 	max-height: 100% !important;
+}
 
+.header{
+margin-bottom: 20px;
 }
 
 .container {
 	padding: 2.5rem;
+	position: relative;
 }
 
-.main-container,
-.side-container {
+.main-container, .side-container {
 	margin-left: 20px;
 	margin-right: 20px;
 	margin-top: 20px;
 	margin-bottom: 20px;
 	position: relative;
 	float: left;
+	max-width: 500px;
 }
 
 .footer {
@@ -37,10 +43,21 @@ body {
 	bottom: 0;
 	width: 100%;
 	height: 2.5rem;
+	/* overflow: hidden; */
 }
 
 #myCanvas {
-	/* have used internal css */
+	border: 5px;
+	border-color: #c3c3c3;
+	border-style: solid;
+	height: auto;
+	width: 100%; 
+}
+
+button {
+	width: auto;
+	height: auto;
+	margin: 5px;
 }
 
 /* about and contact page */
@@ -54,8 +71,9 @@ body {
 #dice_img {
 	border-style: solid;
 	border-radius: 30%;
-	width: 100px;
-	height: 100px;
+	width: 80px;
+	height: 80px;
+	margin: 10px 10px;
 }
 
 
