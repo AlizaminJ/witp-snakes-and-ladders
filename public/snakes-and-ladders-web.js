@@ -9,7 +9,7 @@ function main() {
 	//createBoard();
 	renderBoard();
 	//RenderSquareBoard();
-	moveCoin(coinCurrentPosition, 0);
+	moveCoin(coinOneCurrentPosition, 0, 1);
 
 }
 
@@ -18,9 +18,11 @@ function main() {
 var c = document.getElementById("myCanvas");
 var ctx = c.getContext("2d");
 let cells = [];
-let coinCurrentPosition = 1;
+let coinOneCurrentPosition = 1;
+let coinTwoCurrentPosition = 1;
 let isBoardRenderdOnce = false;
 var coin = document.getElementById("coin");
+var coin2 = document.getElementById("coin2");
 function renderBoard() {
 	// intializing the neccessary variables
 	let row = 10;
@@ -122,7 +124,7 @@ function renderBoard() {
 
 
 // moveCoin(coinCurrentPosition,rollDice());
-function moveCoin(Pos, diceVal) {
+function moveCoin(Pos, diceVal, player) {
 	var lastPos = Pos;
 	console.log(Pos);
 	Pos += diceVal;
@@ -142,16 +144,29 @@ function moveCoin(Pos, diceVal) {
 	var moveToCell = lastPos;
 	var loopRun = Pos - lastPos;
 
+    if (player == 1){
+        coinOneCurrentPosition = Pos;
+    }
+    else if (player == 2){
+        coinTwoCurrentPosition = Pos;
+    }
 	if (Pos < 101) {
-		var currentCell = cells.filter(c => c.cellNum == Pos);
-		if (currentCell) {
-			coinCurrentPosition = Pos;
-		}
+		var currentCellForPlayerOne = cells.filter(c => c.cellNum == coinOneCurrentPosition);
+        var currentCellForPlayerTwo = cells.filter(c => c.cellNum == coinTwoCurrentPosition);
 
 		ctx.clearRect(0, 0, c.width, c.height);
 		renderBoard();
+		if (coinOneCurrentPosition == coinTwoCurrentPosition) {
 
-		ctx.drawImage(coin, currentCell[0].xAxis + 13, currentCell[0].yAxis + 22, 30, 40);
+            ctx.drawImage(coin, currentCellForPlayerOne[0].xAxis + 3, currentCellForPlayerOne[0].yAxis + 22, 30, 40);
+
+            ctx.drawImage(coin2, currentCellForPlayerTwo[0].xAxis + 35, currentCellForPlayerTwo[0].yAxis + 22, 30, 40);
+        }
+        else {
+            ctx.drawImage(coin, currentCellForPlayerOne[0].xAxis + 20, currentCellForPlayerOne[0].yAxis + 22, 30, 40);
+
+            ctx.drawImage(coin2, currentCellForPlayerTwo[0].xAxis + 20, currentCellForPlayerTwo[0].yAxis + 22, 30, 40);
+        }
     }
 	else if(Pos>=100){
 gameOver();
@@ -159,10 +174,23 @@ gameOver();
 };
 
 // can be deleted later
+var player1 = true
 document.getElementById("dice").addEventListener("click", function () {
 	var diceVal = rollDice();
 	document.getElementById("output").innerHTML = diceVal;
-	moveCoin(coinCurrentPosition, diceVal);
+	if (player1) {
+        moveCoin(coinOneCurrentPosition, diceVal, 1);
+        player1 = false;
+        setTimeout(function () {
+            document.getElementById("dice").click();
+        }, 2000);
+
+    }
+    else
+    {
+        moveCoin(coinTwoCurrentPosition, diceVal, 2);
+        player1 = true;
+    }
 });
 
 
@@ -170,7 +198,12 @@ document.getElementById("dice").addEventListener("click", function () {
 function rollDice() {
 	let x = Math.floor(Math.random() * 6) + 1;
 	var dice = document.getElementById("dice_img");
-	dice.src = "images/" + x + ".png";
+	dice.classList.add("diceimage");
+	setTimeout(function () {
+        dice.src = "images/" + x + ".png";
+        dice.classList.remove("diceimage");
+    },1000);
+
 	return x;
 };
 
