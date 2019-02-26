@@ -144,13 +144,22 @@ function moveCoin(Pos, diceVal, player) {
 	var moveToCell = lastPos;
 	var loopRun = Pos - lastPos;
 
-    if (player == 1){
-        coinOneCurrentPosition = Pos;
-    }
-    else if (player == 2){
-        coinTwoCurrentPosition = Pos;
-    }
+
 	if (Pos < 101) {
+        if (player == 1){
+            coinOneCurrentPosition = Pos;
+        }
+        else if (player == 2){
+            coinTwoCurrentPosition = Pos;
+        }
+        if(Pos ==100){
+            if (coinOneCurrentPosition == 100){
+                gameOver("won");
+            }
+            else if (coinTwoCurrentPosition == 100){
+                gameOver("lose");
+            }
+        }
 		var currentCellForPlayerOne = cells.filter(c => c.cellNum == coinOneCurrentPosition);
         var currentCellForPlayerTwo = cells.filter(c => c.cellNum == coinTwoCurrentPosition);
 
@@ -168,10 +177,8 @@ function moveCoin(Pos, diceVal, player) {
             ctx.drawImage(coin2, currentCellForPlayerTwo[0].xAxis + 20, currentCellForPlayerTwo[0].yAxis + 22, 30, 40);
         }
     }
-	else if(Pos>=100){
-gameOver();
-        }
-};
+
+}
 
 // can be deleted later
 var player1 = true
@@ -179,16 +186,20 @@ document.getElementById("dice").addEventListener("click", function () {
 	var diceVal = rollDice();
 	document.getElementById("output").innerHTML = diceVal;
 	if (player1) {
-        moveCoin(coinOneCurrentPosition, diceVal, 1);
+
         player1 = false;
         setTimeout(function () {
+            moveCoin(coinOneCurrentPosition, diceVal, 1);
             document.getElementById("dice").click();
-        }, 2000);
+        }, 2500);
 
     }
     else
     {
-        moveCoin(coinTwoCurrentPosition, diceVal, 2);
+        setTimeout(function () {
+            moveCoin(coinTwoCurrentPosition, diceVal, 2);
+        },1000);
+
         player1 = true;
     }
 });
@@ -208,11 +219,18 @@ function rollDice() {
 };
 
 // gameOver
-function gameOver(){
+function gameOver(msg){
+    if (msg == "won"){
+        swal("Congrats!", "You won!", "success");
+    }else {
+        swal("Oops!", "You Lose!", "warning");
+    }
+
+
     ctx.clearRect(0, 0, c.width, c.height);
     renderBoard();
 	ctx.drawImage(coin, -1,5, 30, 40);
-	swal("Congrats!", "You won!", "success");
+
 
    // document.getElementById("output").innerHTML="Congratulations, you won! Please start a new game!";
 	}
